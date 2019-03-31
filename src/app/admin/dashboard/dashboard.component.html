@@ -1,10 +1,7 @@
-<form (ngSubmit)="showLocation()">
-  <input type="text" [(ngModel)]="address" required [ngModelOptions]="{standalone: true}">
-  <button type="submit">Show Location</button>
-</form>
-<agm-map [latitude]="location?.lat" [longitude]="location?.lng" [zoom]="15" [disableDefaultUI]="false"
+
+<agm-map [latitude]="location?.lat" [longitude]="location?.lng" [zoom]="13" [disableDefaultUI]="false"
   [zoomControl]="false">
-  <agm-marker [latitude]="location?.lat" [longitude]="location?.lng">
+  <agm-marker *ngFor="let m of markers" [latitude]="m?.lat" [longitude]="m?.lng">
   </agm-marker>
 </agm-map>
 <p *ngIf="loading">Loading...</p>
