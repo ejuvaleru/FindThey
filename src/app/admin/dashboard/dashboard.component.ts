@@ -10,7 +10,7 @@ export class DashboardComponent implements OnInit {
 
   public query: string;
   public position: string;
-  public locations: Array<any> = [];
+  public locations: Array<any>;
   direcciones = [
     {
       nombre: 'Tienda 1',
@@ -27,8 +27,8 @@ export class DashboardComponent implements OnInit {
   ];
 
   public constructor(private here: HereService) {
-    //this.query = 'Tracy, CA';
-    //this.position = '37.7397,-121.4252';
+    // this.query = 'Tracy, CA';
+    // this.position = '37.7397,-121.4252';
   }
 
   ngOnInit() {
@@ -47,30 +47,25 @@ export class DashboardComponent implements OnInit {
         dir: 'Cancun'
       }
     ];
-    for (let i = 0; i <= this.direcciones.length; i++) {
-      console.log(this.direcciones[i]['dir']);
-      this.getAddress2(this.direcciones[i]['dir']);
-    }
+
   }
 
-  public getAddress(query) {
-    this.direcciones.forEach(algo => {
-      this.query = algo.dir;
-      console.log('jola');
-      if (this.query !== '') {
-        this.here.getAddress(this.query).then(result => {
-          this.locations = <Array<any>>result;
-        }, error => {
-          console.error(error);
-        });
-      }
-    });
+  public getAddress() {
+    if (this.query !== '') {
+      this.here.getAddress(this.query).then(result => {
+        this.locations = <Array<any>>result;
+        console.log(this.locations);
+      }, error => {
+        console.error(error);
+      });
+    }
   }
 
   public getAddress2(query) {
     if (query !== '') {
       this.here.getAddress(query).then(result => {
         this.locations = <Array<any>>result;
+        console.log(this.locations);
       }, error => {
         console.error(error);
       });
