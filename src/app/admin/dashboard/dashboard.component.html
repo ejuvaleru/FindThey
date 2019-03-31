@@ -1,0 +1,25 @@
+<div>
+  <input type="text" [(ngModel)]="query">
+  <button type="button" (click)="getAddress()">Search</button>
+</div>
+<div>
+  <input type="text" [(ngModel)]="position">
+  <button type="button" (click)="getAddressFromLatLng()">Search</button>
+</div>
+<hr>
+<table style="width: 100%">
+  <thead>
+    <tr style="text-align: left">
+      <th>Label</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr  *ngFor="let location of locations">
+      <td>{{ location.Location.Address.Label }}</td>
+      <td>{{ location.Location.DisplayPosition.Latitude }}</td>
+      <td>{{ location.Location.DisplayPosition.Longitude }}</td>
+    </tr>
+  </tbody>
+</table>
