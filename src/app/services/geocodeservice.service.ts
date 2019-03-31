@@ -5,7 +5,6 @@ import { Subject } from 'rxjs';
 import { of } from 'rxjs';
 import { filter, catchError, tap, map, switchMap } from 'rxjs/operators';
 import { Location } from '../interfaces/location';
-import { request } from 'http';
 
 declare var google: any;
 

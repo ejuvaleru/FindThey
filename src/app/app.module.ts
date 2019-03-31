@@ -17,8 +17,6 @@ import { environment } from 'src/environments/environment';
 import { ClientesComponent } from './admin/clientes/clientes.component';
 import { LandingComponent } from './admin/landing/landing.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatPaginatorModule } from '@angular/material';
-import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -28,8 +26,6 @@ import { MatTableModule } from '@angular/material/table';
     LandingComponent
   ],
   imports: [
-    MatPaginatorModule,
-    MatTableModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

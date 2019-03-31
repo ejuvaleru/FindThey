@@ -1,12 +1,20 @@
 <div class="container mt-4 mb-4">
   <div class="row">
     <div class="col-md-12">
-      <agm-map [latitude]="location?.lat" [longitude]="location?.lng" [zoom]="13" [disableDefaultUI]="false"
+      <agm-map [latitude]="20.9834661" [longitude]="-89.6488937"[zoom]="13" [disableDefaultUI]="false"
         [zoomControl]="true">
         <agm-marker *ngFor="let m of markers" [latitude]="m?.location.lat" [longitude]="m?.location.lng">
         </agm-marker>
+        <agm-marker *ngFor="let n of nerbyPlaces"
+    [latitude] = "n.lat"
+    [longitude] = "n.lng"
+    [iconUrl] = "n.img"
+    
+  >
+  </agm-marker>
       </agm-map>
       <p *ngIf="loading">Loading...</p>
+      <button (click)="addressToCoordinates2()"  class="btn btn-light btn-block">Clientes Potenciales</button>
     </div>
     <div class="col-md-12 mt-2">
       <button type="button" class="btn btn-light btn-block" (click)="showLocation()">Cargar clientes</button>
@@ -32,20 +40,7 @@
       </table>
     </div>
 
-<agm-map [latitude]="20.9834661" [longitude]="-89.6488937" [zoom]="13" [disableDefaultUI]="false"
-  [zoomControl]="false" id="map">
-  <agm-marker *ngFor="let m of markers" [latitude]="m?.location.lat" [longitude]="m?.location.lng" id="map">
-  </agm-marker>
-  <agm-marker *ngFor="let n of nerbyPlaces"
-    [latitude] = "n.lat"
-    [longitude] = "n.lng"
-    [iconUrl] = "n.img"
-    
-  >
-  </agm-marker>
-</agm-map>
-<p *ngIf="loading">Loading...</p>
-<button (click)="showLocation()">Botón</button>
-<button (click)="addressToCoordinates2()">Botón 2</button>
+
+
   </div>
 </div>
