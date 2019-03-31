@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { GeocodeService } from '../../services/geocodeservice.service';
 import { Location } from '../../interfaces/location';
 import { ClientesService } from 'src/app/services/clientes.service';
+import { Cliente } from 'src/app/interfaces/cliente';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,15 +32,18 @@ export class DashboardComponent implements OnInit {
       data.forEach(item => {
         const a = item.payload.toJSON();
         a['$key'] = item.key;
-        this.locations.push(a);
+        this.locations.push(a as Cliente);
       });
     });
-console.log(this.locations);
+
+
+    console.log(this.locations);
+
   }
 
 
-setArreglo(data) {
-  this.locations.push(data);
+  setArreglo(data) {
+    this.locations.push(data);
     this.showLocation();
   }
 
