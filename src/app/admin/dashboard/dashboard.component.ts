@@ -39,23 +39,20 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     const t = this.api.getCoustumers();
-    t.snapshotChanges().subscribe(data => {
-      this.setArreglo(data);
+    t.valueChanges().subscribe(data => {
       data.forEach(item => {
-        const a = item.payload.toJSON();
-        a['$key'] = item.key;
-        this.locations.push(a as Cliente);
+        this.setArreglo(item);
       });
     });
 
 
     console.log(this.locations);
-
   }
 
 
   setArreglo(data) {
     this.locations.push(data);
+    console.log(this.locations);
     this.showLocation();
   }
 
@@ -64,7 +61,8 @@ export class DashboardComponent implements OnInit {
   }
 
   addressToCoordinates() {
-    this.direcciones.forEach(item => {
+
+    this.locations.forEach(item => {
       this.address = item.dir;
       this.loading = true;
       this.geocodeService.geocodeAddress(this.address)
