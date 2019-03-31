@@ -14,9 +14,6 @@ export class ClientesService {
 
   }
 
-
-
-
   getCoustumers() {
     this.locationsRef = this.db.list('direcciones/');
     return this.locationsRef;
