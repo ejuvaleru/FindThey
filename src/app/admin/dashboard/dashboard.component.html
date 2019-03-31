@@ -1,8 +1,16 @@
 
-<agm-map [latitude]="location?.lat" [longitude]="location?.lng" [zoom]="13" [disableDefaultUI]="false"
-  [zoomControl]="false">
-  <agm-marker *ngFor="let m of markers" [latitude]="m?.location.lat" [longitude]="m?.location.lng">
+<agm-map [latitude]="20.9834661" [longitude]="-89.6488937" [zoom]="13" [disableDefaultUI]="false"
+  [zoomControl]="false" id="map">
+  <agm-marker *ngFor="let m of markers" [latitude]="m?.location.lat" [longitude]="m?.location.lng" id="map">
+  </agm-marker>
+  <agm-marker *ngFor="let n of nerbyPlaces"
+    [latitude] = "n.lat"
+    [longitude] = "n.lng"
+    [iconUrl] = "n.img"
+    
+  >
   </agm-marker>
 </agm-map>
 <p *ngIf="loading">Loading...</p>
 <button (click)="showLocation()">Botón</button>
+<button (click)="addressToCoordinates2()">Botón 2</button>

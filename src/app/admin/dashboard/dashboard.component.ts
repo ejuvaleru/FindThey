@@ -5,6 +5,9 @@ import { GeocodeService } from '../../services/geocodeservice.service';
 import { Location } from '../../interfaces/location';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { Cliente } from 'src/app/interfaces/cliente';
+import { google } from '@agm/core/services/google-maps-types';
+import { map } from 'rxjs/operators';
+
 
 
 @Component({
@@ -35,6 +38,36 @@ export class DashboardComponent implements OnInit {
   markers: Array<any> = [];
   locations: any[] = [];
   names: any[] = [];
+  service: any;
+  map: any = '';
+
+  nerbyPlaces = [
+  // tslint:disable-next-line:max-line-length
+  { lat: 21.031040, lng: -89.570347, nombre: 'La Lupita', tipo: 1, img: '../../../assets/img/shop.png' },
+  // tslint:disable-next-line:max-line-length
+  { lat: 20.967787, lng: -89.623893, nombre: 'Restaurante Mérida', tipo: 2, img: '../../../assets/img/food.png' },
+  // tslint:disable-next-line:max-line-length
+  { lat: 20.966402, lng: -89.644232, nombre: 'Oxxo Jacinto', tipo: 3, img: '../../../assets/img/oxxo.png'},
+  // tslint:disable-next-line:max-line-length
+  { lat: 20.9808195, lng: -89.6523484, nombre: 'Oxxo P. Bojorquez', tipo: 3, img: '../../../assets/img/oxxo.png'},
+  // tslint:disable-next-line:max-line-length
+  { lat: 20.980874, lng: -89.6523494, nombre: 'Tienda Toli', tipo: 1, img: '../../../assets/img/shop.png' },
+  // tslint:disable-next-line:max-line-length
+  { lat: 20.9791661, lng: -89.6482172, nombre: 'Comida Corrida Yulisa', tipo: 2, img: '../../../assets/img/food.png' },
+  // tslint:disable-next-line:max-line-length
+  { lat: 20.9771477, lng: -89.6492974, nombre: 'Oxxo Calle 100', tipo: 3, img: '../../../assets/img/oxxo.png' },
+  // tslint:disable-next-line:max-line-length
+  { lat: 20.9768523, lng: -89.6494955, nombre: 'Minisuper Cuy', tipo: 1, img: '../../../assets/img/shop.png' },
+  // tslint:disable-next-line:max-line-length
+  { lat: 20.9791661, lng: -89.6482172, nombre: 'Antojitos Valeria', tipo: 2, img: '../../../assets/img/food.png'},
+  // tslint:disable-next-line:max-line-length
+  { lat: 20.978850, lng: -89.6498476, nombre: 'Antojitos doña lupe', tipo: 2, img: '../../../assets/img/food.png'},
+    // tslint:disable-next-line:max-line-length
+  { lat: 20.9701686, lng: -89.6503058, nombre: 'Tiendita doña lcha', tipo: 1, img: '../../../assets/img/shop.png' },
+   // tslint:disable-next-line:max-line-length
+   { lat: 20.9696591, lng: -89.6492828, nombre: 'Oxxo Calle 61A ', tipo: 3, img: '../../../assets/img/oxxo.png' },
+
+  ];
   private cliente: Cliente;
   public constructor(
     private geocodeService: GeocodeService,
@@ -55,6 +88,7 @@ export class DashboardComponent implements OnInit {
     console.log(this.locations);
 
     this.showLocation();
+
   }
 
   boton() {
@@ -77,6 +111,7 @@ export class DashboardComponent implements OnInit {
     this.addressToCoordinates();
   }
 
+
   addressToCoordinates() {
 
     this.locations.forEach(item => {
@@ -97,4 +132,16 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  addressToCoordinates2() {
+
+    this.nerbyPlaces.forEach(item => {
+      this.markers.push({ location: {lat: item.lat, lng: item.lng} , nombre: item.nombre });
+      console.log(this.markers);
+      this.loading = false;
+      this.ref.detectChanges();
+    });
+  }
+
 }
+
+

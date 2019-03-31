@@ -28,7 +28,8 @@ import { environment } from 'src/environments/environment';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCICaIFllXKHVKDr0lY281Y_9vbi4TNqGw'
+      apiKey: 'AIzaSyCICaIFllXKHVKDr0lY281Y_9vbi4TNqGw',
+      libraries: ['places']
     })
   ],
   providers: [],

@@ -5,14 +5,16 @@ import { Subject } from 'rxjs';
 import { of } from 'rxjs';
 import { filter, catchError, tap, map, switchMap } from 'rxjs/operators';
 import { Location } from '../interfaces/location';
+import { request } from 'http';
 
 declare var google: any;
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class GeocodeService {
-
+  service: any;
   private geocoder: any;
 
   constructor(private mapLoader: MapsAPILoader) { }
@@ -33,27 +35,28 @@ export class GeocodeService {
     return of(true);
   }
 
-  geocodeAddress(location: string): Observable<Location> {
-    console.log('Start geocoding!');
-    return this.waitForMapsToLoad().pipe(
-      // filter(loaded => loaded),
-      switchMap(() => {
-        return new Observable(observer => {
-          this.geocoder.geocode({ 'address': location }, (results, status) => {
-            if (status === google.maps.GeocoderStatus.OK) {
-              console.log('Geocoding complete!');
-              observer.next({
-                lat: results[0].geometry.location.lat(),
-                lng: results[0].geometry.location.lng()
-              });
-            } else {
-              console.log('Error - ', results, ' & Status - ', status);
-              observer.next({ lat: 0, lng: 0 });
-            }
-            observer.complete();
+
+    geocodeAddress(location: string): Observable < Location > {
+      console.log('Start geocoding!');
+      return this.waitForMapsToLoad().pipe(
+        // filter(loaded => loaded),
+        switchMap(() => {
+          return new Observable(observer => {
+            this.geocoder.geocode({ 'address': location }, (results, status) => {
+              if (status === google.maps.GeocoderStatus.OK) {
+                console.log('Geocoding complete!');
+                observer.next({
+                  lat: results[0].geometry.location.lat(),
+                  lng: results[0].geometry.location.lng()
+                });
+              } else {
+                console.log('Error - ', results, ' & Status - ', status);
+                observer.next({ lat: 0, lng: 0 });
+              }
+              observer.complete();
+            });
           });
-        });
-      })
-    );
+        })
+      );
+    }
   }
-}
