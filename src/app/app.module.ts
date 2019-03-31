@@ -14,13 +14,22 @@ import { AgmCoreModule } from '@agm/core';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
+import { ClientesComponent } from './admin/clientes/clientes.component';
+import { LandingComponent } from './admin/landing/landing.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatPaginatorModule } from '@angular/material';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent
+    DashboardComponent,
+    ClientesComponent,
+    LandingComponent
   ],
   imports: [
+    MatPaginatorModule,
+    MatTableModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -29,7 +38,8 @@ import { environment } from 'src/environments/environment';
     AngularFireDatabaseModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCICaIFllXKHVKDr0lY281Y_9vbi4TNqGw'
-    })
+    }),
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

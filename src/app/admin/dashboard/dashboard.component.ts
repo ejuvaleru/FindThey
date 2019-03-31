@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { GeocodeService } from '../../services/geocodeservice.service';
@@ -30,12 +30,23 @@ export class DashboardComponent implements OnInit {
       dir: 'Av Portillo Region 98'
     }
   ];
+  lat: any;
+  lng: any;
+
+  nombreC: string;
+  dirC: string;
+  nombreTiC: string;
+  tipo: number;
+  //////////////
   location: Location;
   loading: boolean;
+  clientes: any[] = [];
   markers: Array<any> = [];
   locations: any[] = [];
   names: any[] = [];
   private cliente: Cliente;
+
+
   public constructor(
     private geocodeService: GeocodeService,
     private ref: ChangeDetectorRef,
@@ -47,14 +58,18 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     const t = this.api.getCoustumers();
     t.valueChanges().subscribe(data => {
+      console.log('clientes', this.cliente);
       data.forEach(item => {
         this.setArreglo(item);
+        this.clientes.push(item);
+        console.log('itemes', item.nombre);
       });
     });
 
     console.log(this.locations);
 
     this.showLocation();
+
   }
 
   boton() {
@@ -62,6 +77,7 @@ export class DashboardComponent implements OnInit {
     t.valueChanges().subscribe(data => {
       data.forEach(item => {
         this.setArreglo(item);
+        console.log('el item', item);
       });
     });
 

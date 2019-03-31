@@ -1,1 +1,66 @@
-<router-outlet></router-outlet>
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>Mi Empresa</h3>
+            <strong>ALJUVALE</strong>
+        </div>
+
+        <ul class="list-unstyled components">
+            <li>
+                <a class="active" routerLink="">
+                    <i class="fas fa-home"></i>
+                    Inicio
+                </a>
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="fas fa-copy"></i>
+                    Clientes
+                </a>
+                <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <li>
+                        <a routerLink="dashboard">Mis Clientes</a>
+                    </li>
+                    <li>
+                        <a href="#">Mapa</a>
+                    </li>
+                    <li>
+                        <a href="#">3</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="fas fa-fax"></i>
+                    Proveedores
+                </a>
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <li>
+                        <a href="#">1</a>
+                    </li>
+                    <li>
+                        <a href="#">2</a>
+                    </li>
+                    <li>
+                        <a href="#">3</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="container" style="width: 100%!important">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <span>Menú</span>
+                </button>
+            </div>
+        </nav>
+        <router-outlet></router-outlet>
+    </div>
+
+</div>
