@@ -9,7 +9,5 @@ export class ClientesService {
   constructor(private http: HttpClient) { }
 
   getCoustumers() {
-    return this.http.get('https://findme-23ded.firebaseio.com/.json').subscribe(data =>
-    console.log('Mostrando data: ', data));
   }
 }

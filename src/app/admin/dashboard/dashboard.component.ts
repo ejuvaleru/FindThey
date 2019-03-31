@@ -12,10 +12,21 @@ import { ClientesService } from 'src/app/services/clientes.service';
 })
 export class DashboardComponent implements OnInit {
 
-  address = 'Avenida Javier Rojo Gomez Puerto Morelos';
+  address = '';
+  direcciones = [
+    {
+      dir: 'Av Tulum Cancun'
+    },
+    {
+      dir: 'Av Andres Quintana Roo Cancun'
+    },
+    {
+      dir: 'Av Portillo Region 98'
+    }
+  ];
   location: Location;
   loading: boolean;
-
+  markers: Array<any> = [];
   public constructor(
     private geocodeService: GeocodeService,
     private ref: ChangeDetectorRef,
@@ -32,14 +43,19 @@ export class DashboardComponent implements OnInit {
   }
 
   addressToCoordinates() {
-    this.loading = true;
-    this.geocodeService.geocodeAddress(this.address)
-      .subscribe((location: Location) => {
-        this.location = location;
-        this.loading = false;
-        this.ref.detectChanges();
-      }
-      );
+    this.direcciones.forEach(item => {
+      this.address = item.dir;
+      this.loading = true;
+      this.geocodeService.geocodeAddress(this.address)
+        .subscribe((location: Location) => {
+          this.location = location;
+          this.markers.push(this.location);
+          console.log(this.markers);
+          this.loading = false;
+          this.ref.detectChanges();
+        }
+        );
+    });
   }
 
 }
