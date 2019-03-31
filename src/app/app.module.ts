@@ -8,6 +8,7 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 //
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,10 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCICaIFllXKHVKDr0lY281Y_9vbi4TNqGw'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
