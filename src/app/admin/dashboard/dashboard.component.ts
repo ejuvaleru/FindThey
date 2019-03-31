@@ -69,12 +69,11 @@ export class DashboardComponent implements OnInit {
 
     this.locations.forEach(item => {
       this.address = item.dir;
-      this.nombre = item.nom;
       this.loading = true;
       this.geocodeService.geocodeAddress(this.address)
         .subscribe((location: Location) => {
           this.location = location;
-          this.markers.push({ location: this.location, nombre: item.nom});
+          this.markers.push({ location: this.location, nombre: item.nombre});
           console.log(this.markers);
           this.loading = false;
           this.ref.detectChanges();
