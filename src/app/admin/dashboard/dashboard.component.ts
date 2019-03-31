@@ -27,14 +27,31 @@ export class DashboardComponent implements OnInit {
   location: Location;
   loading: boolean;
   markers: Array<any> = [];
+  locations: any[] = [];
   public constructor(
     private geocodeService: GeocodeService,
     private ref: ChangeDetectorRef,
     private coustumersService: ClientesService,
+    private api: ClientesService
   ) {
   }
 
   ngOnInit() {
+    const t = this.api.getCoustumers();
+    t.snapshotChanges().subscribe(data => {
+      this.setArreglo(data);
+      data.forEach(item => {
+        const a = item.payload.toJSON();
+        a['$key'] = item.key;
+        this.locations.push(a);
+      });
+    });
+console.log(this.locations);
+  }
+
+
+setArreglo(data) {
+  this.locations.push(data);
     this.showLocation();
   }
 
