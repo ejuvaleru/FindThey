@@ -14,14 +14,18 @@ import { Cliente } from 'src/app/interfaces/cliente';
 export class DashboardComponent implements OnInit {
 
   address = '';
+  nombre = '';
   direcciones = [
     {
+      nom: 'Tiendita 1',
       dir: 'Av Tulum Cancun'
     },
     {
+      nom: 'Tiendita 2',
       dir: 'Av Andres Quintana Roo Cancun'
     },
     {
+      nom: 'Tiendita 3',
       dir: 'Av Portillo Region 98'
     }
   ];
@@ -29,6 +33,7 @@ export class DashboardComponent implements OnInit {
   loading: boolean;
   markers: Array<any> = [];
   locations: any[] = [];
+  names: any[] = [];
   public constructor(
     private geocodeService: GeocodeService,
     private ref: ChangeDetectorRef,
@@ -64,11 +69,12 @@ export class DashboardComponent implements OnInit {
 
     this.locations.forEach(item => {
       this.address = item.dir;
+      this.nombre = item.nom;
       this.loading = true;
       this.geocodeService.geocodeAddress(this.address)
         .subscribe((location: Location) => {
           this.location = location;
-          this.markers.push(this.location);
+          this.markers.push({ location: this.location, nombre: item.nom});
           console.log(this.markers);
           this.loading = false;
           this.ref.detectChanges();
