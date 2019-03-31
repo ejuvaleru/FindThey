@@ -6,6 +6,7 @@ import { Location } from '../../interfaces/location';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { Cliente } from 'src/app/interfaces/cliente';
 
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -34,6 +35,7 @@ export class DashboardComponent implements OnInit {
   markers: Array<any> = [];
   locations: any[] = [];
   names: any[] = [];
+  private cliente: Cliente;
   public constructor(
     private geocodeService: GeocodeService,
     private ref: ChangeDetectorRef,
@@ -50,15 +52,25 @@ export class DashboardComponent implements OnInit {
       });
     });
 
+    console.log(this.locations);
+
+    this.showLocation();
+  }
+
+  boton() {
+    const t = this.api.getCoustumers();
+    t.valueChanges().subscribe(data => {
+      data.forEach(item => {
+        this.setArreglo(item);
+      });
+    });
 
     console.log(this.locations);
   }
-
-
   setArreglo(data) {
     this.locations.push(data);
     console.log(this.locations);
-    this.showLocation();
+
   }
 
   showLocation() {
@@ -73,7 +85,10 @@ export class DashboardComponent implements OnInit {
       this.geocodeService.geocodeAddress(this.address)
         .subscribe((location: Location) => {
           this.location = location;
-          this.markers.push({ location: this.location, nombre: item.nombre});
+          if (this.location.lat !== 0 && this.location.lng !== 0) {
+            this.markers.push({ location: this.location, nombre: item.nombre });
+          }
+
           console.log(this.markers);
           this.loading = false;
           this.ref.detectChanges();
